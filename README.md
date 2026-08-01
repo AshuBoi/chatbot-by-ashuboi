@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AshuBoi ChatterBot
 
-## Getting Started
+Portfolio chatbot built with **Next.js App Router** and the **OpenAI Chat Completions API**.
 
-First, run the development server:
+## Features
+
+- Clean chat UI with loading + error states
+- Server-side API route (`POST /api`) — API key never exposed to the browser
+- Modern `openai` Node SDK (replaces broken legacy `Configuration` / `OpenAIApi` usage)
+- Dependency upgrades to address known npm audit vulnerabilities
+
+## Setup
 
 ```bash
+cp .env.example .env.local
+# put a real OPENAI_API_KEY in .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-```bash
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-```
+Open [http://localhost:3005](http://localhost:3005).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Dev server on port **3005** |
+| `npm run build` | Production build |
+| `npm start` | Start production server on **3005** |
+| `npm run lint` | ESLint |
 
-## Learn More
+## Security notes
 
-To learn more about Next.js, take a look at the following resources:
+- Do **not** commit `.env.local`, `openapi.env`, or `.env.txt`
+- Rotate any key that was previously checked into the repo
+- The chat API validates input and returns structured errors when the key is missing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy (free)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Deploy on [Vercel](https://vercel.com):
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Import this GitHub repo
+2. Add `OPENAI_API_KEY` (and optional `OPENAI_MODEL`) in project env vars
+3. Deploy
